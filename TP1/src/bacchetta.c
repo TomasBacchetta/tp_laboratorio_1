@@ -1,43 +1,67 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "bacchetta.h"
 
-float suma(float a, float b)
-{
 
-    return a + b;
+float sumar(float a, float b)
+{
+    return a+b;
+
 }
 
-float resta(float a, float b)
+float restar(float a, float b)
 {
-
-    return a - b;
+    return a-b;
 }
 
-float division(float a, float b)
+int dividir(float a, float b, float* resultado)
 {
-    return a / b;
-}
-
-float multiplicacion(float a, float b)
-{
-    return a * b;
-}
-
-long factorial(float a)
-{
-    long calculoFactorial = a;
-    for (int x = a; x > 1; x--)
+    int allRight = 0;
+    if (b != 0 && resultado != NULL)
     {
-        calculoFactorial = (long) calculoFactorial * (x-1);
+        *resultado = a / b;
+        allRight = 1;
     }
-    return calculoFactorial;
+
+    return allRight;
+}
+
+float multiplicar(float a, float b)
+{
+    return a*b;
+}
+
+int factorizar(float a, long* resultado)
+{
+    int allRight = 0;
+
+    if (a >= 0 && a < 17 && (a - (int) a) == 0 && resultado!= NULL)
+    {
+        long calculoFactorial = a;
+        for (int x = a; x > 1; x--)
+        {
+            calculoFactorial = (long) calculoFactorial * (x-1);
+
+        }
+        if (a == 0)
+        {
+            *resultado = 1;
+        }
+        else
+        {
+            *resultado = calculoFactorial;
+        }
+
+        allRight = 1;
+    }
+    return allRight;
 }
 
 int menuPrincipal(int flagUno, int flagDos, float numUno, float numDos)
 {
     int opcion;
-
+    fflush(stdin);
     system("cls");
     printf("\n\t<<<MENU DE OPCIONES>>>\n");
     printf("\n1.Ingresar primer operando");
@@ -60,93 +84,33 @@ int menuPrincipal(int flagUno, int flagDos, float numUno, float numDos)
 }
 
 
-void opcionUno(float* operandoUno, float* flagUno)
+void ingresarNumero(float* operando)
 {
-    system("cls");
-    printf("\nIngrese el primer operando: ");
-    scanf("%f", operandoUno);
-    *flagUno = 1;
-}
+    float num; //de esta variable se tomará su dirección al enviarla como parámetro a obtenerString
+    int verif = 0;
 
-void opcionDos(float* operandoDos, float* flagDos)
-{
     system("cls");
-    printf("\nIngrese el segundo operando: ");
-    scanf("%f", operandoDos);
-    *flagDos = 1;
-}
+    if (operando != NULL)
+    {
 
-void opcionTres(int* flagUno, int* flagDos, float* numUno, float* numDos, int* flagOp, float* resSuma, float* resResta, float* resDiv, float* resMulti, long* resFact)
-{
-    system("cls");
-    if (*flagUno && *flagDos)
-    {
-        *flagOp = 1;
-        *resSuma = suma(*numUno, *numDos);
-        *resResta = resta(*numUno, *numDos);
-        if (*numDos != 0)
+        do
         {
-            *resDiv = division(*numUno, *numDos);
-        }
-        *resMulti = multiplicacion((*numUno), (*numDos));
-        if (*numUno >= 0)
-        {
-            *resFact = factorial(*numUno);
-        }
-        printf("\nTodas las operaciones fueron calculadas\n\n");
-    }
-    else
-    {
-        if (*flagUno)
-        {
-            printf ("\nFalta ingresar el segundo operando!\n");
-        }
-        else
-        {
-            if (*flagDos)
+            fflush(stdin); //limpia el buffer
+            printf("\nIngrese el operando: ");
+            if (obtenerString(&num) != 0)
             {
-                printf("\nFalta ingresar el primer operando!\n");
+                printf("Error!");
+                verif = 1;
             }
             else
             {
-                printf("\nFaltan ingresar ambos operandos!\n");
+                verif = 0;
+                *operando = num; //al ser exitoso, ingresar
             }
-        }
-    }
-    system("pause");
 
-}
-
-void opcionCuatro(int* flagOp, float* numUno, float* numDos, float* resSuma, float* resResta, float* resDiv, float* resMul, long* resFact)
-{
-    system("cls");
-    if (*flagOp == 1)
-    {
-        printf("\nEl resultado de la suma es: %.2f \n", *resSuma);
-        printf("\nEl resultado de la resta es: %.2f \n", *resResta);
-        if (*numDos == 0)
-        {
-            printf("\nNo es posible dividir por cero!\n");
         }
-        else
-        {
-            printf("\nEl resultado de la division es: %.2f \n", *resDiv + 0.00);
-        }
-        printf("\nEl resultado de la multiplicacion es: %.2f \n", *resMul + 0.00);
-        if (*numUno >= 0 && *numUno < 17 && (*numUno - (int) *numUno) == 0)
-        {
-            printf("\nEl factorial de a es: %li \n\n", *resFact);
-        }
-        else
-        {
-            printf("\nNo se puede sacar factorial de A si este es negativo o no entero, o si el resultado da un numero demasiado grande\n\n");
-        }
+        while (verif);
     }
-    else
-    {
-        printf("\nPara tener los resultados debe hacer los cálculos primero!\n");
-    }
-    system("pause");
 }
 
 void salir(char* respuesta)
@@ -161,3 +125,99 @@ void salir(char* respuesta)
 
 
 }
+
+void activarFlag(int * bandera)
+{
+    *bandera = 1;
+}
+
+void resetearFlag(int * bandera)
+{
+    *bandera = 0;
+}
+
+int fixedGets(char * cadena, int longitud)
+{
+    int allRight = -1;
+    if (cadena != NULL && longitud > 0 && fgets(cadena, longitud, stdin)== cadena  && cadena[0] != '\n')
+    {
+        fflush(stdin);
+        if (cadena[strlen(cadena)-1] == '\n')
+        {
+            cadena[strlen(cadena)-1] = '\0';
+        }
+        allRight = 0;
+    }
+    return allRight;
+}
+
+int obtenerString(float * pResultado)
+{
+    int allRight = -1;
+    char buffer[64];
+    if (pResultado != NULL)
+    {
+        if (fixedGets(buffer, sizeof(buffer)) == 0 && esNumericoFloat(buffer))
+        {
+            *pResultado = atof(buffer);
+            allRight = 0;
+        }
+
+    }
+    return allRight;
+}
+
+int esNumericoFloat(char * cadena)
+{
+    int allRight = 1;
+    int contadorPunto = 0;
+
+    if (cadena != NULL && strlen(cadena) > 0){
+        for (int x = 0; x < strlen(cadena); x++)
+        {
+            if (cadena[x] < '0' || cadena[x] > '9') //si el caracter no es numerico
+            {
+                if (cadena[x] == '.') // si el caracter es un punto
+                {
+                    contadorPunto++;
+                    if (contadorPunto > 1 || x == 0 || x == strlen(cadena)-1 || (x == 1 && cadena[0] == '-')) //si hay mas de un punto, o si este esta al final o al principio, o si prosigue a un signo negativo
+                    {
+                        allRight = 0;
+                        break;
+                    }
+
+                }
+                else // si no es un punto
+                {
+                    if (cadena[x] == '-') // si el caracter es un signo negativo
+                    {
+                        if (x != 0) //si el signo negativo no se encuentra al principio
+                        {
+                            allRight = 0;
+                            break;
+                        }
+                        else //si el signo negativo se encuentra al principio
+                        {
+                            if (strlen(cadena) == 1) //si la cadena solo tiene un elemento
+                            {
+                                allRight = 0;
+                                break;
+                            }
+                        }
+                    }
+                    else //si el caracter tampoco es un signo negativo
+                    {
+                        allRight = 0;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return allRight;
+}
+
+
+
+
+
