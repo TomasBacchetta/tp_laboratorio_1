@@ -1,14 +1,13 @@
 /*
  ============================================================================
  Name        : TP1.c
- Author      : tomas
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Author      : Tomás Bacchetta
+ Version     : 1.0
+ Copyright   : Tomás Bacchetta UTNFRA 1G
+ Description : Calculadora de dos operandos
  ============================================================================
  */
 
-/*Bacchetta, Tomás - TP1*/
 
 #include <stdio.h>
 #include <stdlib.h>
