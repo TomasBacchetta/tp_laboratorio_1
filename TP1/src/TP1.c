@@ -3,11 +3,10 @@
  Name        : TP1.c
  Author      : Tomás Bacchetta
  Version     : 1.0
- Copyright   : Tomás Bacchetta UTNFRA 1G
- Description : Calculadora de dos operandos
+ Copyright   : Tomás Bacchetta 1G UTNFRA 2021
+ Description : Calculadora de dos operandos para sumar, restar, dividir, multiplicar y factorizar
  ============================================================================
  */
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,41 +31,45 @@ int main()
     int factOk = 0;
 
     setbuf(stdout, NULL);
-    do
+    do //do while principal
     {
         system("cls"); //limpia la pantalla
         switch(menuPrincipal(flagNumeroUno, flagNumeroDos, numeroUno, numeroDos))
         {
         case 1:
-            ingresarNumero(&numeroUno);
-            flagNumeroUno = 1; //flag testigo del exito de la carga de datos
+            if(ingresarNumero(&numeroUno)){
+                flagNumeroUno = 1; //flag testigo del exito de la carga del primer operando
+            }
+
             break;
         case 2:
-            ingresarNumero(&numeroDos);
-            flagNumeroDos = 1;
+            if(ingresarNumero(&numeroDos)){
+                flagNumeroDos = 1;
+            }
+
             break;
         case 3:
             system("cls");
-            if (flagNumeroUno && flagNumeroDos)
+            if (flagNumeroUno && flagNumeroDos) // si se realizaron las dos cargas
             {
-                activarFlag(&flagOperacion);
+                flagOperacion = 1;
                 resultadoSuma = sumar(numeroUno, numeroDos);
                 resultadoResta = restar(numeroUno, numeroDos);
                 resultadoMul = multiplicar(numeroUno, numeroDos); //hasta aqui a las variables de resultado se les asigna el retorno de las funciones de operacion
-                divOk = dividir(numeroUno, numeroDos, &resultadoDiv); //desde aqui, a variables de flag se retorna el valor de las funciones (1 ok, 0 error)
+                divOk = dividir(numeroUno, numeroDos, &resultadoDiv); //desde aqui, a variables de flag se retorna el valor de las funciones (1 ok, 0 error), para estas dos operaciones particulares
                 factOk = factorizar(numeroUno, &resultadoFact);
-                if (divOk && factOk)
+                if (divOk && factOk) // si se pudo factorizar y dividir
                 {
                     printf("\nTodas las operaciones fueron calculadas\n\n");
                 }
-                else
+                else //si alguna de esas dos operaciones no se pudo realizar
                 {
                     printf("\nNo todas las operaciones pudieron realizarse. Vea la opcion resultados para ver que sucedio.\n");
                 }
             }
             else
             {
-                if (flagNumeroUno)
+                if (flagNumeroUno) // si se cargo solo el primer operando
                 {
                     printf ("\nFalta ingresar el segundo operando!\n");
                 }
@@ -76,7 +79,7 @@ int main()
                     {
                         printf("\nFalta ingresar el primer operando!\n");
                     }
-                    else
+                    else // si no se cargo ninguno de los dos operandos
                     {
                         printf("\nFaltan ingresar ambos operandos!\n");
                     }
@@ -85,37 +88,10 @@ int main()
             system("pause");
             break;
         case 4:
-            system("cls");
-            if (flagOperacion == 1)
-            {
-                printf("El resultado de la suma es %.2f\n", resultadoSuma);
-                printf("\nEl resultado de la resta es: %.2f\n", resultadoResta);
-                if (divOk)
-                {
-                    printf("\nEl resultado de la division es: %.2f\n", resultadoDiv + 0.00); //sumar 0.00 evita un eventual cero negativo
-                }
-                else
-                {
-                    printf("\nNo es posible dividir por cero!\n");
-                }
-                printf("\nEl resultado de la multiplicacion es: %.2f\n", resultadoMul + 0.00);
-                if (factOk)
-                {
-                    printf("\nEl factorial de a es: %li\n\n", resultadoFact);
-                }
-                else
-                {
-                    printf("\nNo se puede sacar factorial de A si este es negativo o no entero, o si el resultado da un numero demasiado grande\n\n");
-                }
-            }
-            else
-            {
-                printf("\nPara tener los resultados debe hacer los cálculos primero!\n");
-            }
-            system("pause");
-            break;
+            mostrarResultados(flagOperacion, divOk, factOk, resultadoSuma, resultadoResta, resultadoDiv, resultadoMul, resultadoFact);
+           break;
         case 5:
-            salir(&respuesta);
+            respuesta = salir(respuesta);
             break;
         default:
             printf("\nOpcion invalida!\n");
@@ -126,6 +102,8 @@ int main()
 
     return 0;
 }
+
+
 
 
 
