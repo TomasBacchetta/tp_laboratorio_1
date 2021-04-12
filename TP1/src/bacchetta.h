@@ -1,9 +1,10 @@
 /*
- * bacchetta.h
+ * bacchetta.c
  *
- *  Created on: 11 abril de 2021
+ *  Created on: 11 abril 2021
  *      Author: Tomás Bacchetta
  */
+
 
 #ifndef BACCHETTA_H_INCLUDED
 #define BACCHETTA_H_INCLUDED
@@ -11,6 +12,8 @@
 
 
 #endif // BACCHETTA_H_INCLUDED
+
+
 
 
 /** \brief realiza la suma de a y b y la devuelve
@@ -126,3 +129,23 @@ int esNumericoFloat(char * cadena);
  */
 void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float resResta, float resDiv, float resMul, long int resFact);
 
+/** \brief imprime alertas si se selecciono la opcion tercera sin haber cargados operandos anteriormente
+ *
+ * \param flagNumUno int
+ * \param flagNumDos int
+ * \param flagOp int*
+ * \return int
+ *
+ */
+int validarCargas(int flagNumUno, int flagNumDos, int * flagOp);
+
+/** \brief alerta si se logro dividir o factorizar y pasa por referencia los valores de flag de las respectivas operaciones
+ *
+ * \param logroDividir int
+ * \param logroFactorizar int
+ * \param divOk int*
+ * \param factOk int*
+ * \return void
+ *
+ */
+void alertaFactDiv(int logroDividir, int logroFactorizar, int* divOk, int* factOk);

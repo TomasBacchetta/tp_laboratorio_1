@@ -47,11 +47,11 @@ int factorizar(float a, long* resultado)
 {
     int allRight = 0;
 
-    if (a >= 0 && a < 17 && (a - (int) a) == 0 && resultado!= NULL) // si es natural menor a 17 y entero y el puntero resultado no apunta al vacio
+    if (a >= 0 && a < 17 && (a - (int) a) == 0 && resultado!= NULL) // si es natural menor a 17 y entero yel puntero resultado no apunta al vacio
     {
         long calculoFactorial = a;
         if (a == 0){
-            *resultado = 1; //si el operando es 0 la factorizacion es siempre 1
+            calculoFactorial = 1; //si el operando es 0 la factorizacion es siempre 1
         } else {
             for (int x = a; x > 1; x--)
             {
@@ -127,9 +127,10 @@ char salir(char respuesta)
 {
     do
     {
+        system("cls");
         fflush(stdin); //evita que aparezcan multiples preguntas al ingresar mas de un caracter
         printf("\n\nSeguro que quiere salir? (s/n)");
-        scanf(" %c", &respuesta);
+        scanf("%c", &respuesta);
     }
     while (respuesta != 's' && respuesta != 'n');
 
@@ -236,7 +237,69 @@ void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float r
 
 }
 
+int validarCargas(int flagNumUno, int flagNumDos, int * flagOp)
+{
+    int allRight = 0;
+    if (flagOp != NULL){
+        if (flagNumUno && flagNumDos && flagOp != NULL) // si se realizaron las dos cargas
+        {
+           *flagOp = 1;
+           allRight = 1;
+        }
+        else
+        {
+            if (flagNumUno) // si se cargo solo el primer operando
+            {
+                printf ("\nFalta ingresar el segundo operando!\n");
+            }
+            else
+            {
+                if (flagNumDos)
+                {
+                    printf("\nFalta ingresar el primer operando!\n");
+                }
+                else // si no se cargo ninguno de los dos operandos
+                {
+                    printf("\nFaltan ingresar ambos operandos!\n");
+                }
+            }
+        }
+    } else {
+        printf("Se produjo un error inesperado al validar el ingreso de operandos para la operacion. Intente operar de nuevo\n\n");
+    }
+    return allRight;
+}
 
+void alertaFactDiv(int logroDividir, int logroFactorizar, int *divOk, int *factOk){
+    *divOk = 0; //devuelve a cero el flag para primera y futuras operaciones
+    *factOk = 0; //devuelve a cero el flag para primera y futuras operaciones
+    if (divOk != NULL && factOk != NULL)
+    {
+        if (logroDividir && logroFactorizar) // si se pudo factorizar y dividir
+        {
+            printf("\nTodas las operaciones fueron calculadas satisfactoriamente\n\n");
+            *divOk = 1;
+            *factOk = 1;
+        }
+        else //si alguna de esas dos operaciones no se pudo realizar
+        {
+            if (logroDividir){
+                printf("\nSe pudo calcular todo menos la factorizacion. Vea la opcion resultados para mas informacion\n\n");
+                *divOk = 1;
+            } else {
+                if (logroFactorizar){
+                    printf("\nSe pudo calcular todo menos la division. Vea la opcion resultados para mas informacion\n\n");
+                    *factOk = 1;
+                } else{
+                    printf("\nSe pudo calcular todo menos la division y la factorizacion. Vea la opcion resultados para mas informacion\n\n");
+                }
+            }
+        }
+    } else {
+        printf("Se produjo un error inesperado al validar las operaciones de división y multiplicación. Intente operar de nuevo\n\n");
+    }
+
+}
 
 
 
