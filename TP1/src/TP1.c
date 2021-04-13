@@ -8,9 +8,10 @@
  ============================================================================
  */
 
+/*Bacchetta, Tomás - TP1*/
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
 #include "bacchetta.h"
 
@@ -27,7 +28,7 @@ int main()
     float resultadoResta;
     float resultadoDiv;
     float resultadoMul;
-    long resultadoFact;
+    int resultadoFact;
     int divOk = 0;
     int factOk = 0;
 
@@ -35,7 +36,7 @@ int main()
     do //do while principal
     {
         system("cls"); //limpia la pantalla
-        switch(menuPrincipal(flagNumeroUno, flagNumeroDos, numeroUno, numeroDos))
+        switch(menuPrincipal(flagNumeroUno, flagNumeroDos, numeroUno, numeroDos)) //switch de opciones retornadas por la funcion que imprime el menu
         {
         case 1:
             if(ingresarNumero(&numeroUno))

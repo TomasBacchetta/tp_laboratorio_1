@@ -10,8 +10,6 @@
 #include <string.h>
 #include "bacchetta.h"
 
-
-
 float sumar(float a, float b)
 {
     return a+b;
@@ -43,19 +41,19 @@ float multiplicar(float a, float b)
     return a*b;
 }
 
-int factorizar(float a, long* resultado)
+int factorizar(float a, int* resultado)
 {
     int allRight = 0;
 
-    if (a >= 0 && a < 17 && (a - (int) a) == 0 && resultado!= NULL) // si es natural menor a 17 y entero yel puntero resultado no apunta al vacio
+    if (a >= 0 && a < 13 && (a - (int) a) == 0 && resultado!= NULL) // si a es natural menor a 13 y entero y el puntero resultado no apunta al vacio
     {
-        long calculoFactorial = a;
+        int calculoFactorial = a;
         if (a == 0){
             calculoFactorial = 1; //si el operando es 0 la factorizacion es siempre 1
         } else {
             for (int x = a; x > 1; x--)
             {
-            calculoFactorial = (long) calculoFactorial * (x-1);
+            calculoFactorial = calculoFactorial * (x-1);
             }
         }
         *resultado = calculoFactorial;
@@ -205,7 +203,7 @@ int esNumericoFloat(char * cadena)
     return allRight;
 }
 
-void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float resResta, float resDiv, float resMul, long int resFact){
+void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float resResta, float resDiv, float resMul, int resFact){
     system("cls");
             if (flagOp == 1)
             {
@@ -222,7 +220,7 @@ void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float r
                 printf("\nEl resultado de la multiplicacion es: %.2f\n", resMul + 0.00);
                 if (factOk)
                 {
-                    printf("\nEl factorial de a es: %li\n\n", resFact);
+                    printf("\nEl factorial de a es: %d\n\n", resFact);
                 }
                 else
                 {
@@ -234,7 +232,6 @@ void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float r
                 printf("\nPara tener los resultados debe hacer los calculos primero!\n");
             }
             system("pause");
-
 }
 
 int validarCargas(int flagNumUno, int flagNumDos, int * flagOp)

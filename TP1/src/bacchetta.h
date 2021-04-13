@@ -14,8 +14,6 @@
 #endif // BACCHETTA_H_INCLUDED
 
 
-
-
 /** \brief realiza la suma de a y b y la devuelve
  *
  * \param a float recibe el valor del primer operando y lo copia en a
@@ -60,7 +58,7 @@ float multiplicar(float a, float b);
  * \return int
  *
  */
-int factorizar(float a, long* resultado);
+int factorizar(float a, int* resultado);
 
 /** \brief imprime el menu y de ser ingrados numeros en la opcion 1 y 2, los imprime también
  *
@@ -127,7 +125,7 @@ int esNumericoFloat(char * cadena);
  * \return void
  *
  */
-void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float resResta, float resDiv, float resMul, long int resFact);
+void mostrarResultados(int flagOp, int divOk, int factOk, float resSuma, float resResta, float resDiv, float resMul, int resFact);
 
 /** \brief imprime alertas si se selecciono la opcion tercera sin haber cargados operandos anteriormente
  *
