@@ -26,7 +26,7 @@ float restar(float a, float b)
 int dividir(float a, float b, float* resultado)
 {
     int allRight = 0;
-    if (b != 0 && resultado != NULL)
+    if (b != 0 && resultado != NULL && sizeof(resultado) > 0)
     {
         *resultado = a / b;
         allRight = 1;
@@ -45,7 +45,7 @@ int factorizar(float a, int* resultado)
 {
     int allRight = 0;
 
-    if (a >= 0 && a < 13 && (a - (int) a) == 0 && resultado!= NULL) // si a es natural menor a 13 y entero y el puntero resultado no apunta al vacio
+    if (a >= 0 && a < 13 && (a - (int) a) == 0 && resultado != NULL && sizeof(resultado) > 0) // si a es natural menor a 13 y el puntero resultado no apunta al vacio
     {
         int calculoFactorial = a;
         if (a == 0){
@@ -94,13 +94,13 @@ int ingresarNumero(float* operando)
     int verif = 0;
 
     system("cls");
-    if (operando != NULL)
+    if (operando != NULL && sizeof(operando) > 0)
     {
 
         do
         {
             fflush(stdin); //limpia el buffer
-            printf("\nIngrese el operando: ");
+            printf("\nIngrese el operando (puede volver y cambiarlo si lo desea): ");
             if (obtenerString(&num) != 0)
             {
                 printf("Error!");
@@ -142,7 +142,7 @@ int obtenerString(float * pResultado)
     char buffer[64];
     if (pResultado != NULL)
     {
-        if (fixedGets(buffer, sizeof(buffer)) == 0 && esNumericoFloat(buffer))
+        if (fixedGets(buffer, sizeof(buffer)) == 0 && esNumericoFloat(buffer)) //llama a fixedGets y verifica si funciona
         {
             *pResultado = atof(buffer);
             allRight = 0;
@@ -171,7 +171,7 @@ int esNumericoFloat(char * cadena)
 {
     int allRight = 1; //inicia en verdadero, y de no cumplir algun requisito la funcion le asignara el 0
     int contadorPunto = 0;
-    int stop = 0;
+    int stop = 0;// se utiliza esta variable para reemplazar el break de la iteracion y evitar conflicto con el switch
 
     if (cadena != NULL && strlen(cadena) > 0){ //si el puntero cadena no apunta al vacio y su largo es mayor a 0
         for (int x = 0; x < strlen(cadena) && !stop ; x++)
@@ -183,7 +183,7 @@ int esNumericoFloat(char * cadena)
                         if (contadorPunto > 1 || x == 0 || x == strlen(cadena)-1 || (x == 1 && cadena[0] == '-')) //si hay mas de un punto, o si este esta al final o al principio, o si prosigue a un signo negativo
                     {
                         allRight = 0;
-                        stop = 1; //finaliza la iteracion (utilizar break entraria en conflicto con el switch)
+                        stop = 1; //finaliza la iteracion
                     }
                     break;
                     case '-':

@@ -4,7 +4,7 @@
  Author      : Tomás Bacchetta
  Version     : 1.0
  Copyright   : Tomás Bacchetta 1G UTNFRA 2021
- Description : Calculadora de dos operandos para sumar, restar, dividir, multiplicar y factorizar
+ Description : Calculadora de dos operandos para sumar, restar, dividir, multiplicar y factorizar numeros con punto flotante
  ============================================================================
  */
 
