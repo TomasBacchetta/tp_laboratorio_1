@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1625094841 source:c:\users\tomas\desktop\utn\laboratorio i\lenguajec\clase 23\linkedlist\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"comida.h"
+
+1624923585 c:\users\tomas\desktop\utn\laboratorio i\lenguajec\clase 23\linkedlist\linkedlist.h
+
+1625087787 source:c:\users\tomas\desktop\utn\laboratorio i\lenguajec\clase 23\linkedlist\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1625088416 source:c:\users\tomas\desktop\utn\laboratorio i\lenguajec\clase 23\linkedlist\comida.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"comida.h"
+
+1625088642 c:\users\tomas\desktop\utn\laboratorio i\lenguajec\clase 23\linkedlist\comida.h
+	"LinkedList.h"
+
