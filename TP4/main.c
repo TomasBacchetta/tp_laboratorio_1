@@ -170,7 +170,7 @@ int main()
     system("pause");
     system("cls");
 
-    printf(">>AHORA SE BORRARA EL ULTIMO ELEMENTO DE UNA LISTA, PERO SE COPIARA EN LA PRIMERA POSICION<\n");
+    printf(">>AHORA SE BORRARA EL ULTIMO ELEMENTO DE UNA LISTA, PERO SE COPIARA EN LA PRIMERA POSICION<");
     printf("\n>>ESTO ES POSIBLE CON LL_POP<\n");
     if (comida_mostrarComidas(listaComidas)){
         exit(1);
@@ -181,7 +181,7 @@ int main()
         exit(1);
     }
     printf("\n>>LL_POP FUNCIONO(13/17)<");
-    printf("\n\n");
+    printf("\n");
     system("pause");
     system("cls");
 
@@ -189,6 +189,7 @@ int main()
     if (comida_mostrarComidas(listaComidas3)){
         exit(1);
     }
+    printf("\n");
     if (comida_mostrarComidas(listaComidas)){
         exit(1);
     }
@@ -206,6 +207,7 @@ int main()
     if (comida_mostrarComidas(listaComidas3)){
         exit(1);
     }
+     printf("\n");
     if (comida_mostrarComidas(listaComidas)){
         exit(1);
     }
@@ -224,6 +226,7 @@ int main()
     if (comida_mostrarComidas(listaComidas4)){
         exit(1);
     }
+     printf("\n");
     if (comida_mostrarComidas(listaComidas3)){
         exit(1);
     }
@@ -240,6 +243,7 @@ int main()
     if (comida_mostrarComidas(listaComidas)){
         exit(1);
     }
+     printf("\n");
     if (comida_mostrarComidas(listaComidas3)){
         exit(1);
     }
@@ -268,7 +272,7 @@ int main()
     if (comida_mostrarComidas(listaComidas)){
         exit(1);
     }
-
+     printf("\n");
     if (comida_mostrarComidas(listaFiltrada)){
         exit(1);
     }
